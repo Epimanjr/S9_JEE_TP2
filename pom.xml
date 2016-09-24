@@ -14,16 +14,9 @@
 
   <developers>
     <developer>
-      <id>jayblanc</id>
-      <name>Jerome Blanchard</name>
-      <email>jayblanc@gmail.com</email>
-      <url>http://wiki.jayblanc.fr</url>
-      <organization>ATILF - CNRS</organization>
-      <organizationUrl>http://www.atilf.fr</organizationUrl>
-      <roles>
-        <role>architect</role>
-        <role>developer</role>
-      </roles>
+      <id>epiman</id>
+      <name>Maxime BLAISE</name>
+      <email>maxime.blaise@outlook.fr</email>
       <timezone>Europe/Paris</timezone>
     </developer>
   </developers>
