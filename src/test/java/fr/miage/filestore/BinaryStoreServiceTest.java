@@ -16,50 +16,51 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class BinaryStoreServiceTest {
-	
+
 	private static BinaryStoreService service;
-	
+
 	@BeforeClass
 	public static void init() {
-		//TODO create service
+		// TODO create service
+		service = new Service();
 	}
-	
+
 	@Before
 	public void prepare() {
 	}
-	
+
 	@After
 	public void clean() {
 	}
-	
+
 	@Test
 	public void testPut() throws BinaryStoreServiceException {
 		String wrongkey = "blabla";
 		String key = service.put(new ByteArrayInputStream("This is a super stream".getBytes()));
-			
+
 		assertTrue(service.exists(key));
 		assertFalse(service.exists(wrongkey));
 	}
-	
-	@Test (expected=BinaryStreamNotFoundException.class)
+
+	@Test(expected = BinaryStreamNotFoundException.class)
 	public void testGetWrongKey() throws BinaryStoreServiceException, BinaryStreamNotFoundException {
 		String wrongkey = "akeythatdoesnotexists";
 		service.get(wrongkey);
 	}
-	
+
 	@Test
 	public void testGet() throws BinaryStoreServiceException, BinaryStreamNotFoundException {
-		String content = "This is a magical content"; 
+		String content = "This is a magical content";
 		InputStream original = new ByteArrayInputStream(content.getBytes());
 		String key = service.put(original);
-		try ( InputStream in = service.get(key) ) {
+		try (InputStream in = service.get(key)) {
 			int b = 0;
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			while ( (b = in.read()) != -1 ) {
+			while ((b = in.read()) != -1) {
 				baos.write(b);
 			}
-			String retreive = new String(baos.toByteArray()); 
-			assertEquals(retreive, original);
+			String retreive = new String(baos.toByteArray());
+			assertEquals(retreive, content);
 		} catch (IOException e) {
 			fail(e.getMessage());
 		}
